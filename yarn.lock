@@ -2429,9 +2429,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chathub-extension@workspace:.":
+"chatvn-extension@workspace:.":
   version: 0.0.0-use.local
-  resolution: "chathub-extension@workspace:."
+  resolution: "chatvn-extension@workspace:."
   dependencies:
     "@crxjs/vite-plugin": "npm:^2.0.0-beta.18"
     "@floating-ui/react": "npm:^0.26.1"

@@ -14,33 +14,33 @@ import PriceSection from './PriceSection'
 import Testimonials from './Testimonials'
 
 const PremiumModal: FC = () => {
-  const { t } = useTranslation()
-  const navigate = useNavigate()
-  const [open, setOpen] = useAtom(showPremiumModalAtom)
-  const discountCode = useDiscountCode()
+    const { t } = useTranslation()
+    const navigate = useNavigate()
+    const [open, setOpen] = useAtom(showPremiumModalAtom)
+    const discountCode = useDiscountCode()
 
-  const feature = typeof open === 'string' ? open : undefined
+    const feature = typeof open === 'string' ? open : undefined
 
-  useEffect(() => {
-    if (open) {
-      incrPremiumModalOpenTimes().then((openTimes) => {
-        trackEvent('show_premium_modal', { source: feature, openTimes })
-      })
-    }
-  }, [feature, open])
+    useEffect(() => {
+        if (open) {
+            incrPremiumModalOpenTimes().then((openTimes) => {
+                trackEvent('show_premium_modal', { source: feature, openTimes })
+            })
+        }
+    }, [feature, open])
 
-  const onClickBuy = useCallback(() => {
-    trackEvent('click_buy_premium', { source: 'premium_modal' })
-    setOpen(false)
-    navigate({ to: '/premium', search: { source: 'after_click_buy_premium' } })
-  }, [navigate, setOpen])
+    const onClickBuy = useCallback(() => {
+        trackEvent('click_buy_premium', { source: 'premium_modal' })
+        setOpen(false)
+        navigate({ to: '/premium', search: { source: 'after_click_buy_premium' } })
+    }, [navigate, setOpen])
 
-  const close = useCallback(() => {
-    setOpen(false)
-  }, [setOpen])
+    const close = useCallback(() => {
+        setOpen(false)
+    }, [setOpen])
 
-  return (
-    <Dialog title={t('Premium Feature')} open={!!open} onClose={close} className="min-w-[600px]">
+    return (
+        <Dialog title={t('Premium Feature')} open={!!open} onClose={close} className="min-w-[600px]">
       <div className="flex flex-col items-center my-7 gap-7 overflow-y-auto">
         <div className="flex flex-col items-center gap-3">
           <PriceSection align="center" />
@@ -50,7 +50,7 @@ const PremiumModal: FC = () => {
           <FeatureList highlightFeature={feature} />
         </div>
         <a
-          href={`https://chathub.gg/api/premium/redirect?source=${feature || ''}&discountCode=${discountCode || ''}`}
+          href={`https://chatvn.org/api/premium/redirect?source=${feature || ''}&discountCode=${discountCode || ''}`}
           target="_blank"
           rel="noreferrer"
           onClick={onClickBuy}
@@ -60,7 +60,7 @@ const PremiumModal: FC = () => {
         <Testimonials />
       </div>
     </Dialog>
-  )
+    )
 }
 
 export default PremiumModal

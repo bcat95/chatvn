@@ -9,43 +9,43 @@ import SingleBotChatPanel from './pages/SingleBotChatPanel'
 const rootRoute = new RootRoute()
 
 const layoutRoute = new Route({
-  getParentRoute: () => rootRoute,
-  component: Layout,
-  id: 'layout',
+    getParentRoute: () => rootRoute,
+    component: Layout,
+    id: 'layout',
 })
 
 const indexRoute = new Route({
-  getParentRoute: () => layoutRoute,
-  path: '/',
-  component: MultiBotChatPanel,
+    getParentRoute: () => layoutRoute,
+    path: '/',
+    component: MultiBotChatPanel,
 })
 
 function ChatRoute() {
-  const { botId } = useParams({ from: chatRoute.id })
-  return <SingleBotChatPanel botId={botId as BotId} />
+    const { botId } = useParams({ from: chatRoute.id })
+    return <SingleBotChatPanel botId={botId as BotId} />
 }
 
 const chatRoute = new Route({
-  getParentRoute: () => layoutRoute,
-  path: 'chat/$botId',
-  component: ChatRoute,
+    getParentRoute: () => layoutRoute,
+    path: 'chat/$botId',
+    component: ChatRoute,
 })
 
 const settingRoute = new Route({
-  getParentRoute: () => layoutRoute,
-  path: 'setting',
-  component: SettingPage,
+    getParentRoute: () => layoutRoute,
+    path: 'setting',
+    component: SettingPage,
 })
 
 export const premiumRoute = new Route({
-  getParentRoute: () => layoutRoute,
-  path: 'premium',
-  component: PremiumPage,
-  validateSearch: (search: Record<string, unknown>) => {
-    return {
-      source: search.source as string | undefined,
-    }
-  },
+    getParentRoute: () => layoutRoute,
+    path: 'premium',
+    component: PremiumPage,
+    validateSearch: (search: Record < string, unknown > ) => {
+        return {
+            source: search.source as string | undefined,
+        }
+    },
 })
 
 const routeTree = rootRoute.addChildren([layoutRoute.addChildren([indexRoute, chatRoute, settingRoute, premiumRoute])])
@@ -54,9 +54,9 @@ const hashHistory = createHashHistory()
 const router = new ReactRouter({ routeTree, history: hashHistory })
 
 declare module '@tanstack/react-router' {
-  interface Register {
-    router: typeof router
-  }
+    interface Register {
+        router: typeof router
+    }
 }
 
 export { router }

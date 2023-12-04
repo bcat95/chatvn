@@ -7,30 +7,30 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 import manifest from './manifest.config'
 
 export default defineConfig(({ mode }) => {
-  return {
-    plugins: [
-      tsconfigPaths(),
-      react({
-        babel: {
-          plugins: [jotaiDebugLabel, jotaiReactRefresh],
+    return {
+        plugins: [
+            tsconfigPaths(),
+            react({
+                babel: {
+                    plugins: [jotaiDebugLabel, jotaiReactRefresh],
+                },
+            }),
+            crx({ manifest }),
+        ],
+        build: {
+            rollupOptions: {
+                input: ['app.html'],
+            },
         },
-      }),
-      crx({ manifest }),
-    ],
-    build: {
-      rollupOptions: {
-        input: ['app.html'],
-      },
-    },
-    esbuild: {
-      drop: mode === 'production' ? ['console', 'debugger'] : [],
-    },
-    server: {
-      strictPort: true,
-      port: 5173,
-      hmr: {
-        clientPort: 5173,
-      },
-    },
-  }
+        esbuild: {
+            drop: mode === 'production' ? ['console', 'debugger'] : [],
+        },
+        server: {
+            strictPort: true,
+            port: 5173,
+            hmr: {
+                clientPort: 5173,
+            },
+        },
+    }
 })

@@ -15,46 +15,46 @@ import { premiumRoute } from '~app/router'
 import { activatePremium, deactivatePremium } from '~services/premium'
 
 function PremiumPage() {
-  const { t } = useTranslation()
-  const premiumState = usePremium()
-  const [activating, setActivating] = useState(false)
-  const [deactivating, setDeactivating] = useState(false)
-  const [activationError, setActivationError] = useState('')
-  const { source } = useSearch({ from: premiumRoute.id })
-  const [isExploding, setIsExploding] = useState(false)
-  const discountCode = useDiscountCode()
+    const { t } = useTranslation()
+    const premiumState = usePremium()
+    const [activating, setActivating] = useState(false)
+    const [deactivating, setDeactivating] = useState(false)
+    const [activationError, setActivationError] = useState('')
+    const { source } = useSearch({ from: premiumRoute.id })
+    const [isExploding, setIsExploding] = useState(false)
+    const discountCode = useDiscountCode()
 
-  const activate = useCallback(async () => {
-    const key = window.prompt('Enter your license key', '')
-    if (!key) {
-      return
-    }
-    setActivationError('')
-    setActivating(true)
-    trackEvent('activate_license')
-    try {
-      await activatePremium(key)
-    } catch (err) {
-      console.error('activation', err)
-      setActivationError(getPath(err, 'data.error') || 'Activation failed')
-      setActivating(false)
-      return
-    }
-    setTimeout(() => location.reload(), 500)
-  }, [])
+    const activate = useCallback(async () => {
+        const key = window.prompt('Enter your license key', '')
+        if (!key) {
+            return
+        }
+        setActivationError('')
+        setActivating(true)
+        trackEvent('activate_license')
+        try {
+            await activatePremium(key)
+        } catch (err) {
+            console.error('activation', err)
+            setActivationError(getPath(err, 'data.error') || 'Activation failed')
+            setActivating(false)
+            return
+        }
+        setTimeout(() => location.reload(), 500)
+    }, [])
 
-  const deactivateLicense = useCallback(async () => {
-    if (!window.confirm('Are you sure to deactivate this device?')) {
-      return
-    }
-    setDeactivating(true)
-    trackEvent('deactivate_license')
-    await deactivatePremium()
-    setTimeout(() => location.reload(), 500)
-  }, [])
+    const deactivateLicense = useCallback(async () => {
+        if (!window.confirm('Are you sure to deactivate this device?')) {
+            return
+        }
+        setDeactivating(true)
+        trackEvent('deactivate_license')
+        await deactivatePremium()
+        setTimeout(() => location.reload(), 500)
+    }, [])
 
-  return (
-    <div className="flex flex-col bg-primary-background dark:text-primary-text rounded-[20px] h-full p-[50px] overflow-y-auto">
+    return (
+        <div className="flex flex-col bg-primary-background dark:text-primary-text rounded-[20px] h-full p-[50px] overflow-y-auto">
       <h1 className="font-bold text-[40px] leading-none text-primary-text">{t('Premium')}</h1>
       {!premiumState.activated && (
         <div className="flex flex-col gap-4 mt-9">
@@ -84,7 +84,7 @@ function PremiumPage() {
         ) : (
           <>
             <a
-              href={`https://chathub.gg/api/premium/redirect?source=${source || ''}&discountCode=${discountCode || ''}`}
+              href={`https://chatvn.org/api/premium/redirect?source=${source || ''}&discountCode=${discountCode || ''}`}
               target="_blank"
               rel="noreferrer"
               onClick={() => trackEvent('click_buy_premium', { source: 'premium_page' })}
@@ -107,7 +107,7 @@ function PremiumPage() {
       <Toaster position="top-right" />
       {isExploding && <ConfettiExplosion duration={3000} onComplete={() => setIsExploding(false)} />}
     </div>
-  )
+    )
 }
 
 export default PremiumPage
