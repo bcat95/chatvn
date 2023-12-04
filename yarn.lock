@@ -2317,10 +2317,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cachified@npm:^3.5.4":
-  version: 3.5.4
-  resolution: "cachified@npm:3.5.4"
-  checksum: 16da8d9ed79ed5ef8a3c50f3d3f50719aff4b824ab746a27f4ae2f3c060fc034f8a48127d5d3e29d452cf2aa451a8dd293021b01bed3183d475a4b23c058aa0f
+"cachified@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "cachified@npm:4.0.0"
+  checksum: 16907d9e02467605fd3b01701e93b2c29408071bd7930fe3c2940ed5136052c9eb02c37cb36843526588da5be50bc29c74bc30b92eadfbca0d58f830f9038931
   languageName: node
   linkType: hard
 
@@ -2458,7 +2458,7 @@ __metadata:
     "@vitejs/plugin-react": "npm:^4.1.1"
     autoprefixer: "npm:^10.4.16"
     browser-fs-access: "npm:^0.35.0"
-    cachified: "npm:^3.5.4"
+    cachified: "npm:^4.0.0"
     chrome-types: "npm:^0.1.240"
     clsx: "npm:^2.0.0"
     dayjs: "npm:^1.11.10"
